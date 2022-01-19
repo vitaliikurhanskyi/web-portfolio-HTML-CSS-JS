@@ -1,0 +1,239 @@
+@import "normalize"
+@import "fonts"
+@import "libs"
+@import "vars"
+
+
+*
+	-webkit-box-sizing: border-box
+	-moz-box-sizing: border-box
+	box-sizing: border-box
+	&:before, &:after
+		-webkit-box-sizing: border-box
+		-moz-box-sizing: border-box
+		box-sizing: border-box
+
+*::-webkit-input-placeholder
+	color: #666
+	opacity: 1
+
+*:-moz-placeholder
+	color: #666
+	opacity: 1
+
+*::-moz-placeholder
+	color: #666
+	opacity: 1
+
+*:-ms-input-placeholder
+	color: #666
+	opacity: 1
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid
+	color: #666
+body input:required:valid,
+body textarea:required:valid
+	color: #666
+
+html, body
+	height: 100%
+
+body
+	font-size: 16px
+	min-width: 320px
+	position: relative
+	line-height: 1.65
+	font-family: $default-font
+	overflow-x: hidden
+	font-family: "lato"
+
+.img-responsive
+	display: block
+	max-width: 100%
+	height: auto
+
+.text-center
+	text-align: center
+
+::selection
+	background-color: $accent
+	color: #fff
+
+h1, h2
+	margin: 0
+
+
+html
+	font-size: 14px
+
+.wrapper
+	max-width: 1000px
+	margin: 0 auto
+	overflow: hidden
+
+.__container
+	max-width: 922px
+	margin: 0 auto
+	//padding: 0 10px
+
+.photo__wrap
+	width: 233px
+	height: 233px
+	border-radius: 50%
+	border: 13px solid #6a9ac5
+	box-shadow: 0px 0px 3px 0px rgba(106, 154, 197, 1)
+	overflow: hidden
+	background: url("../img/profile-photo.jpg") 50% 20% no-repeat
+	background-size: 120% auto
+
+.header
+	background-color: #6467af
+
+.header__row
+	display: flex
+	padding-top: 28px
+	padding-bottom: 21px
+
+.header__photo
+	flex-basis: 30%
+
+.header__info
+	flex-basis: 45%
+
+.header__contacts
+	flex-basis: 39%
+
+.info__row
+	padding-left: 21px
+
+.info__h1
+	display: inline-block
+	font-family: "Lobster 1.4"
+	font-size: 59px
+	font-weight: 400
+	line-height: normal
+	color: #ffffff
+	margin-top: -10px
+	margin-bottom: 5px
+
+
+.info__position
+	font-family: "lato"
+	font-weight: 400
+	font-size: 1.857142857142857rem
+	text-transform: uppercase
+	color: #ffffff
+	margin-top: 4px
+	margin-bottom: 5px
+	margin-left: -1px
+
+.info__text
+	font-family: "lato"
+	font-weight: 400
+	font-size: 14px
+	margin: 0
+	color: #ffffff
+	line-height: 19px
+	opacity: 0.8
+
+.contacts__row
+	padding-left: 52px
+	padding-right: 5px
+
+.phone__img
+	padding-right: 0.8571428571428571rem
+	display: inline-block
+	vertical-align: top
+
+.website__img
+	padding-right: 0.8571428571428571rem
+	display: inline-block
+	vertical-align: top
+
+.e-mail__img
+	padding-right: 0.8571428571428571rem
+	display: inline-block
+	vertical-align: top
+
+.location__img
+	padding-right: 0.8571428571428571rem
+	display: inline-block
+	vertical-align: top
+
+.phone__link
+	display: inline-block
+	font-family: "lato"
+	font-weight: 400
+	font-size: 1.142857142857143rem
+	white-space: nowrap
+
+.website__link
+	display: inline-block
+	font-family: "lato"
+	font-weight: 400
+	font-size: 1.142857142857143rem
+	white-space: nowrap
+
+.e-mail__link
+	display: inline-block
+	font-family: "lato"
+	font-weight: 400
+	font-size: 1.142857142857143rem
+	white-space: nowrap
+
+.location__link
+	display: inline-block
+	font-family: "lato"
+	font-weight: 400
+	font-size: 1.142857142857143rem
+	white-space: nowrap
+
+.location__text
+	display: inline-block
+	white-space: normal
+	padding-top: 7px
+	//padding-right: 10px
+	color: #ffffff
+	word-wrap: break-word
+
+.location__text:hover
+	text-decoration: underline
+
+.e-mail__text:hover
+	text-decoration: underline
+
+.website__text:hover
+	text-decoration: underline
+
+.phone__text:hover
+	text-decoration: underline
+
+.e-mail__text
+	display: inline-block
+	white-space: normal
+	padding-top: 6px
+	color: #ffffff
+	word-wrap: break-word
+
+.website__text
+	display: inline-block
+	white-space: normal
+	padding-top: 5px
+	color: #ffffff
+	word-wrap: break-word
+
+.phone__text
+	display: inline-block
+	white-space: normal
+	padding-top: 5px
+	color: #ffffff
+	word-wrap: break-word
+
+.contacts__col
+	padding: 7px 0
+
+
+
+
+@import "media" // Всегда в конце
