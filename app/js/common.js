@@ -73,6 +73,49 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	});
 
+
+	var languages = [
+		{name : 'language1', color: '#10e63e', procents: '.9'},
+		{name : 'language2', color: '#e68610', procents: '.5'},
+		{name : 'language3', color: '#e69e10', procents: '.7'},
+		{name : 'language4', color: '#1010e6', procents: '.3'},
+	];
+
+
+	languages.forEach(
+	  function circle(object) {
+	  	var name = object.name;
+		name = new ProgressBar.Line('#' + name + '', {
+		  strokeWidth: 4,
+		  easing: 'easeInOut',
+		  duration: 1400,
+		  color: object.color,
+		  trailColor: '#eee',
+		  trailWidth: 4,
+		  svgStyle: {width: '100%', height: '100%'},
+		  text: {
+		    style: {
+		      // Text color.
+		      // Default: same as stroke color (options.color)
+		      color: '#999',
+		      position: 'absolute',
+		      right: '0',
+		      top: '-21px',
+		      padding: 0,
+		      margin: 0,
+		      transform: null
+		    },
+		    autoStyleContainer: false
+		  },
+		  step: (state, bar) => {
+		    bar.setText(Math.round(bar.value() * 100) + ' %');
+		  }
+		});
+
+		name.animate(object.procents);  // Number from 0.0 to 1.0
+
+	});
+
 });
 
 
