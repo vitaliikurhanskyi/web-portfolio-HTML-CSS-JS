@@ -17,7 +17,7 @@ var gulp         = require('gulp'),
 gulp.task('browser-sync', function() {
 	browserSync.init({
 		server: {
-			baseDir: 'app'
+			baseDir: 'app',
 		},
 		notify: false,
 		// online: false, // Work offline without internet connection
@@ -44,6 +44,7 @@ gulp.task('sass', function() {
 gulp.task('js', function() {
 	return gulp.src([
 		//'app/libs/jquery/dist/jquery.min.js',
+		'app/libs/progressbar/progressbar.js',
 		'app/js/common.js', // Всегда в конце
 		])
 	.pipe(babel({
