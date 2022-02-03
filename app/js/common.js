@@ -1,15 +1,74 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-	var circles = [
-	  {name : 'container', colorStart: '#FFEA82', colorEnd: '#ED6A5A', procents: '1.0'},
-	  {name : 'container2', colorStart: '#FFEA82', colorEnd: '#9634eb', procents: '0.7'},
-	  {name : 'container3', colorStart: '#FFEA82', colorEnd: '#10e698', procents: '0.2'},
-	  {name : 'container4', colorStart: '#FFEA82', colorEnd: '#1086e6', procents: '0.4'},
-	];
 
-	circles.forEach(
+	//scroll
+
+	var isScrolling = false;
+
+	window.addEventListener("scroll", throttleScroll, false);
+
+	function throttleScroll(e) {
+	    if (isScrolling == false ) {
+	        window.requestAnimationFrame(function() {
+	          dealWithScrolling(e);
+	          isScrolling = false;
+	        });
+	    }
+	    isScrolling = true;
+	}
+
+	function dealWithScrolling(e) {
+	    console.log(window.innerHeight);
+	}
+
+
+	//circles
+
+	var circlesItems = document.querySelectorAll('.progress-circle__item');
+
+	var circlesData = [];
+
+	function makeCircles(id, colorStart, colorEnd, procents) {
+    return {
+			name : id,
+			colorStart : colorStart,
+			colorEnd : colorEnd,
+			procents : procents
+	    }
+  	};
+
+  	var circlesText = document.querySelectorAll('.progress-circle__text');
+
+  	for (let i = 0; i < circlesItems.length; i++) {
+		circlesItems[i].id = 'id-' + i + '';
+		var circleId = circlesItems[i].id;
+		var colorStart = circlesItems[i].dataset.colorStart;
+		var colorEnd = circlesItems[i].dataset.colorEnd;
+		var procents = circlesText[i].dataset.procentsText / 100;
+		circlesData[i] = makeCircles(circleId, colorStart, colorEnd, procents);
+  	}
+
+  	for (let i = 0; i < circlesText.length; i++) {
+
+  		textCounter(circlesText[i], circlesText[i].dataset.procentsText);
+
+	}
+
+	function textCounter(obj, stop) {
+		var counter = 0;
+		setInterval(() => {
+			if(counter == stop){
+				clearInterval();
+			} else {
+				counter += 1;
+				obj.innerHTML = counter + '%';
+			}
+
+	  	}, 5);
+	}
+
+	circlesData.forEach(
 	  function circle(object) {
 	    var name = object.name;
-	    //console.log(name);
 	    name = new ProgressBar.Circle('#' + name + '', {
 	      color: '#FFEA82',
 	      trailColor: '#eee',
@@ -30,17 +89,30 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	  }
 	);
 
+	//lines
 
-	var lines = [
-		{name : 'line', color: '#328da8', procents: '1.0'},
-		{name : 'line2', color: '#86e610', procents: '.5'},
-		{name : 'line3', color: '#e69e10', procents: '.7'},
-		{name : 'line4', color: '#1010e6', procents: '.3'},
-	];
+	var linesItems = document.querySelectorAll('.line-skills__line');
 
+	var linesData = [];
 
-	lines.forEach(
-	  function circle(object) {
+	function makeLines(id, color, procents) {
+    return {
+			name : id,
+			color : color,
+			procents : procents,
+	    }
+  	};
+
+  	for (let i = 0; i < linesItems.length; i++) {
+		linesItems[i].id = 'line-' + i + '';
+		var lineId = linesItems[i].id;
+		var color = linesItems[i].dataset.color;
+		var procents = linesItems[i].dataset.procents;
+		linesData[i] = makeLines(lineId, color, procents);
+  	}
+
+	linesData.forEach(
+	  function lines(object) {
 	  	var name = object.name;
 		name = new ProgressBar.Line('#' + name + '', {
 		  strokeWidth: 4,
@@ -73,17 +145,30 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	});
 
+	// languages
 
-	var languages = [
-		{name : 'language1', color: '#10e63e', procents: '.9'},
-		{name : 'language2', color: '#e68610', procents: '.5'},
-		{name : 'language3', color: '#e69e10', procents: '.7'},
-		{name : 'language4', color: '#1010e6', procents: '.3'},
-	];
+	var languagesItems = document.querySelectorAll('.line-languages__line');
 
+	var languagesData = [];
 
-	languages.forEach(
-	  function circle(object) {
+	function makeLanguages(id, color, procents) {
+    return {
+			name : id,
+			color : color,
+			procents : procents,
+	    }
+  	};
+
+  	for (let i = 0; i < languagesItems.length; i++) {
+		languagesItems[i].id = 'language-' + i + '';
+		var lineId = languagesItems[i].id;
+		var color = languagesItems[i].dataset.color;
+		var procents = languagesItems[i].dataset.procents;
+		languagesData[i] = makeLanguages(lineId, color, procents);
+  	}
+
+	languagesData.forEach(
+	  function languages(object) {
 	  	var name = object.name;
 		name = new ProgressBar.Line('#' + name + '', {
 		  strokeWidth: 4,
