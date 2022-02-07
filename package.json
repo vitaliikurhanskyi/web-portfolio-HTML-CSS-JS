@@ -29,5 +29,8 @@
     "pngquant-bin": "^6.0.0",
     "sass": "^1.42.1",
     "vinyl-ftp": "^0.6.1"
+  },
+  "dependencies": {
+    "floss-js": "^1.0.0"
   }
 }
