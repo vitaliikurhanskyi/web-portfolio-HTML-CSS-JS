@@ -5,6 +5,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var isScrolling = false;
 	var didItShowLines = false;
 	var didItShowLanguages = false;
+	var didItShowCircles = false;
+
+	function elmentTarget(selector) {
+		var element = document.querySelector(selector);
+		return element;
+	}
+
+	function showAnimation(element, duration) {
+
+		var top = element.getBoundingClientRect().top;
+
+		var windowBottom = window.pageYOffset + document.documentElement.clientHeight;
+
+		var plusDistanse = windowBottom - duration;
+
+		if(plusDistanse > top ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	if(showAnimation(elmentTarget('#progress-circle'), 100) ) {
+    	showCircle();
+    }
 
 	window.addEventListener("scroll", throttleScroll, false);
 
@@ -25,26 +50,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	    if(showAnimation(elmentTarget('#line-languages'), 600) && !didItShowLanguages) {
 	    	showLanguages();
 	    }
-	}
+	    if(showAnimation(elmentTarget('#progress-circle'), 300) && !didItShowCircles) {
+	    	showCircle();
+	    }
 
-	function elmentTarget(selector) {
-		var element = document.querySelector(selector);
-		return element;
-	}
-
-	function showAnimation(element, duration) {
-
-		var top = element.getBoundingClientRect().top;
-
-		var windowBottom = window.pageYOffset + document.documentElement.clientHeight;
-
-		var plusDistanse = windowBottom - duration;
-
-		if(plusDistanse > top ) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	// Получаем нужный элемент
@@ -94,71 +103,77 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	//circles
 
-	var circlesItems = document.querySelectorAll('.progress-circle__item');
+	function showCircle() {
 
-	var circlesData = [];
+		var circlesItems = document.querySelectorAll('.progress-circle__item');
 
-	function makeCircles(id, colorStart, colorEnd, procents) {
-    return {
-			name : id,
-			colorStart : colorStart,
-			colorEnd : colorEnd,
-			procents : procents
-	    }
-  	};
+		var circlesData = [];
 
-  	var circlesText = document.querySelectorAll('.progress-circle__text');
+		function makeCircles(id, colorStart, colorEnd, procents) {
+	    return {
+				name : id,
+				colorStart : colorStart,
+				colorEnd : colorEnd,
+				procents : procents
+		    }
+	  	};
 
-  	for (let i = 0; i < circlesItems.length; i++) {
-		circlesItems[i].id = 'id-' + i + '';
-		var circleId = circlesItems[i].id;
-		var colorStart = circlesItems[i].dataset.colorStart;
-		var colorEnd = circlesItems[i].dataset.colorEnd;
-		var procents = circlesText[i].dataset.procentsText / 100;
-		circlesData[i] = makeCircles(circleId, colorStart, colorEnd, procents);
-  	}
+	  	var circlesText = document.querySelectorAll('.progress-circle__text');
 
-  	for (let i = 0; i < circlesText.length; i++) {
+	  	for (let i = 0; i < circlesItems.length; i++) {
+			circlesItems[i].id = 'id-' + i + '';
+			var circleId = circlesItems[i].id;
+			var colorStart = circlesItems[i].dataset.colorStart;
+			var colorEnd = circlesItems[i].dataset.colorEnd;
+			var procents = circlesText[i].dataset.procentsText / 100;
+			circlesData[i] = makeCircles(circleId, colorStart, colorEnd, procents);
+	  	}
 
-  		textCounter(circlesText[i], circlesText[i].dataset.procentsText);
+	  	for (let i = 0; i < circlesText.length; i++) {
+
+	  		textCounter(circlesText[i], circlesText[i].dataset.procentsText);
+
+		}
+
+		function textCounter(obj, stop) {
+			var counter = 0;
+			setInterval(() => {
+				if(counter == stop){
+					clearInterval();
+				} else {
+					counter += 1;
+					obj.innerHTML = counter + '%';
+				}
+
+		  	}, 5);
+		}
+
+		circlesData.forEach(
+		  function circle(object) {
+		    var name = object.name;
+		    name = new ProgressBar.Circle('#' + name + '', {
+		      color: '#FFEA82',
+		      trailColor: '#eee',
+		      trailWidth: 5,
+		      duration: 1400,
+		      easing: 'bounce',
+		      strokeWidth: 6,
+		      from: {color: object.colorStart, a:0},
+		      to: {color: object.colorEnd, a:1},
+		      // Set default step function for all animate calls
+		      step: function(state, circle) {
+		        circle.path.setAttribute('stroke' , state.color);
+		      }
+		    });
+
+		    name.animate(object.procents);
+
+		  }
+		);
+
+		didItShowCircles = true;
 
 	}
-
-	function textCounter(obj, stop) {
-		var counter = 0;
-		setInterval(() => {
-			if(counter == stop){
-				clearInterval();
-			} else {
-				counter += 1;
-				obj.innerHTML = counter + '%';
-			}
-
-	  	}, 5);
-	}
-
-	circlesData.forEach(
-	  function circle(object) {
-	    var name = object.name;
-	    name = new ProgressBar.Circle('#' + name + '', {
-	      color: '#FFEA82',
-	      trailColor: '#eee',
-	      trailWidth: 5,
-	      duration: 1400,
-	      easing: 'bounce',
-	      strokeWidth: 6,
-	      from: {color: object.colorStart, a:0},
-	      to: {color: object.colorEnd, a:1},
-	      // Set default step function for all animate calls
-	      step: function(state, circle) {
-	        circle.path.setAttribute('stroke' , state.color);
-	      }
-	    });
-
-	    name.animate(object.procents);
-
-	  }
-	);
 
 	//lines
 
